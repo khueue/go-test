@@ -9,18 +9,18 @@ ENV \
 
 WORKDIR /go/src/app
 
-COPY ./go.* ./
+COPY ./app/go.* ./
 RUN go mod download
 
-COPY ./ ./
+COPY ./app/ ./
 RUN go build -o /dist/app ./
 
 # --- Scratch image with executable only.
 
 FROM scratch
 
-WORKDIR /app
+WORKDIR /_dist
 
-COPY --from=builder /dist/app ./
+COPY --from=builder /dist/app /_dist/app
 
-CMD ["./app"]
+ENTRYPOINT [ "/_dist/app" ]

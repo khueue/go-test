@@ -6,13 +6,13 @@ TAG_SHELL=go-shell
 
 build-dist:
 	docker build \
-		--file ./dist.Dockerfile \
+		--file ./app/dist.Dockerfile \
 		--tag $(TAG_DIST) \
 		./
 
 build-shell:
 	docker build \
-		--file ./shell.Dockerfile \
+		--file ./app/shell.Dockerfile \
 		--tag $(TAG_SHELL) \
 		./
 
@@ -24,4 +24,4 @@ vet: build-shell
 	docker run --interactive --tty --rm \
 		--mount type="bind",source="$(PWD)",target="/go/src/app",consistency="delegated" \
 		$(TAG_SHELL) \
-		bash -c "goimports -w ./"
+		bash -c "goimports -w ./app/"
