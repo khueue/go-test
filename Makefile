@@ -6,13 +6,13 @@ TAG_SHELL=go-shell
 
 build-dist:
 	docker build \
-		--file ./app/dist.Dockerfile \
+		--file ./dist.Dockerfile \
 		--tag $(TAG_DIST) \
 		./
 
 build-shell:
 	docker build \
-		--file ./app/shell.Dockerfile \
+		--file ./shell.Dockerfile \
 		--tag $(TAG_SHELL) \
 		./
 
