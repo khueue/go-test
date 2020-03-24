@@ -1,27 +1,22 @@
 default:
 	@ cat Makefile
 
-TAG_DIST=go-dist
-TAG_SHELL=go-shell
+IMAGE_SHELL=go-test-shell
 
-build-dist:
-	docker build \
-		--file ./dist.Dockerfile \
-		--tag $(TAG_DIST) \
-		./
+run:
+	make cmd cmd="bash ./bin/run.sh"
+
+fmt:
+	make cmd cmd="bash ./bin/fmt.sh"
+
+cmd: build-shell
+	docker run --interactive --tty --rm \
+		--mount type="bind",source="$(PWD)",target="/go/src/app",consistency="delegated" \
+		$(IMAGE_SHELL) \
+		$(cmd)
 
 build-shell:
 	docker build \
 		--file ./shell.Dockerfile \
-		--tag $(TAG_SHELL) \
+		--tag $(IMAGE_SHELL) \
 		./
-
-run: build-dist
-	docker run --interactive --tty --rm \
-		$(TAG_DIST)
-
-vet: build-shell
-	docker run --interactive --tty --rm \
-		--mount type="bind",source="$(PWD)",target="/go/src/app",consistency="delegated" \
-		$(TAG_SHELL) \
-		bash -c "goimports -w ./app/"
