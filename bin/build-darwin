@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+# set -o xtrace
+
+export CGO_ENABLED=0
+export GOOS=darwin
+export GOARCH=amd64
+
+mkdir -p ./_dist
+rm -rf ./_dist/app-darwin
+
+echo
+echo "--- Building app-darwin ..."
+( cd ./src && go build -o ../_dist/app-darwin ./ )

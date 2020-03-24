@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+# set -o xtrace
+
+export CGO_ENABLED=0
+export GOOS=linux
+export GOARCH=amd64
+
+mkdir -p ./_dist
+rm -rf ./_dist/app-linux
+
+echo
+echo "--- Building app-linux ..."
+( cd ./src && go build -o ../_dist/app-linux ./ )
