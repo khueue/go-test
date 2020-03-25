@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+# set -o xtrace
+
+echo
+echo "--- Vetting code ..."
+
+cd ./src
+
+goimports -w ./
+
+go mod tidy
+
+echo "--- Vetting code ... done!"

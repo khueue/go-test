@@ -5,14 +5,16 @@ set -o pipefail
 set -o nounset
 # set -o xtrace
 
+echo
+echo "--- Building app-linux ..."
+
 export CGO_ENABLED=0
 export GOOS=linux
 export GOARCH=amd64
 
-mkdir -p ./_dist
 rm -rf ./_dist/app-linux
 
-echo
-echo "--- Building app-linux ..."
-( cd ./src && go build -o ../_dist/app-linux ./ )
+cd ./src
+go build -o ../_dist/app-linux ./
+
 echo "--- Building app-linux ... done!"
