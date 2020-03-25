@@ -18,13 +18,8 @@ rm -rf ../_dist/linux/
 mkdir ../_dist/linux/
 
 go build \
-	-ldflags "-s -w" \
 	-race \
 	-o ../_dist/linux/app \
 	./
-
-# upx \
-# 	-o ../_dist/linux/app-upx \
-# 	../_dist/linux/app
 
 echo "--- Building app-linux ... done!"
