@@ -8,6 +8,6 @@ set -o nounset
 echo
 echo "--- Running app-linux ..."
 
-./_dist/app-linux
+./_dist/linux/app
 
 echo "--- Running app-linux ... done!"

@@ -8,13 +8,23 @@ set -o nounset
 echo
 echo "--- Building app-linux ..."
 
-export CGO_ENABLED=0
+export CGO_ENABLED=1
 export GOOS=linux
 export GOARCH=amd64
 
-rm -rf ./_dist/app-linux
-
 cd ./src
-go build -o ../_dist/app-linux ./
+
+rm -rf ../_dist/linux/
+mkdir ../_dist/linux/
+
+go build \
+	-ldflags "-s -w" \
+	-race \
+	-o ../_dist/linux/app \
+	./
+
+# upx \
+# 	-o ../_dist/linux/app-upx \
+# 	../_dist/linux/app
 
 echo "--- Building app-linux ... done!"

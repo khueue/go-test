@@ -12,9 +12,13 @@ export CGO_ENABLED=0
 export GOOS=darwin
 export GOARCH=amd64
 
-rm -rf ./_dist/app-darwin
-
 cd ./src
-go build -o ../_dist/app-darwin ./
+
+rm -rf ../_dist/darwin/
+mkdir ../_dist/darwin/
+
+go build \
+	-o ../_dist/darwin/app \
+	./
 
 echo "--- Building app-darwin ... done!"
