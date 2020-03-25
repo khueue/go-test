@@ -1,10 +1,10 @@
 default: cmd
 
 run:
-	make cmd="./bin/vet-code && ./bin/build-linux && ./bin/run-linux"
+	make cmd="./bin/vet && ./bin/test && ./bin/build-linux && ./bin/run-linux"
 
 build-darwin:
-	make cmd="./bin/vet-code && ./bin/build-darwin"
+	make cmd="./bin/vet && ./bin/test && ./bin/build-darwin"
 
 IMAGE_SHELL=go-test-shell
 
