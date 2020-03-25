@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# set -o errexit
+# set -o pipefail
+set -o nounset
+# set -o xtrace
+
+function wait_for_change {
+	echo
+	echo "--- Watching for changes ..."
+	inotifywait \
+		--quiet \
+		--event modify,move,create,delete \
+		--recursive \
+		"./src/"
+}
+
+while wait_for_change; do
+	./bin/vet
+	./bin/test
+done

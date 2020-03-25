@@ -3,6 +3,7 @@ FROM golang:1.14.1-buster
 RUN apt-get update \
 	&& apt-get install -y \
 		upx \
+		inotify-tools \
 	&& apt-get clean
 
 # Tooling unrelated to app.

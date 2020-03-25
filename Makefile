@@ -1,5 +1,8 @@
 default: cmd
 
+watch:
+	make cmd="./bin/watch"
+
 run:
 	make cmd="./bin/vet && ./bin/test && ./bin/build-linux && ./bin/run-linux"
 
