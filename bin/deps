@@ -8,3 +8,4 @@ set -o nounset
 echo
 echo "--- Downloading dependencies ..."
 ( cd ./src && go mod download )
+echo "--- Downloading dependencies ... done!"

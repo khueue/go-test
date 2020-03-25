@@ -7,21 +7,32 @@ import (
 	"time"
 )
 
-func WaitGroupRun(items []string) {
-	process := func(x string) {
-		time.Sleep(time.Duration(rand.Intn(500)) * time.Millisecond)
-		Dump(x)
+func NewWaitGroupWorker(items []string) *WaitGroupWorker {
+	return &WaitGroupWorker{
+		items: items,
+		wg:    sync.WaitGroup{},
 	}
+}
 
-	var wg sync.WaitGroup
-	for _, x := range items {
+type WaitGroupWorker struct {
+	items []string
+	wg    sync.WaitGroup
+}
+
+func (w *WaitGroupWorker) process(x string) {
+	time.Sleep(time.Duration(rand.Intn(500)) * time.Millisecond)
+	Dump(x)
+}
+
+func (w *WaitGroupWorker) Run() {
+	for _, x := range w.items {
 		x := x // Unique copy for the processing.
-		wg.Add(1)
+		w.wg.Add(1)
 		go func() {
-			process(x)
-			wg.Done()
+			w.process(x)
+			w.wg.Done()
 		}()
 	}
-	wg.Wait()
-	fmt.Println("All done")
+	w.wg.Wait()
+	fmt.Println("All done!")
 }

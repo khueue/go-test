@@ -8,3 +8,4 @@ set -o nounset
 echo
 echo "--- Running goimports ..."
 ( cd ./src && goimports -w ./ )
+echo "--- Running goimports ... done!"

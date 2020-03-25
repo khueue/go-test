@@ -19,6 +19,9 @@ func main() {
 		"eight",
 	}
 
-	WaitGroupRun(items)
-	QueueChanRun(items)
+	waitGroupWorker := NewWaitGroupWorker(items)
+	waitGroupWorker.Run()
+
+	queueChanWorker := NewQueueChanWorker(items, 3)
+	queueChanWorker.Run()
 }
