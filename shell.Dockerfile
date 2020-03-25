@@ -7,7 +7,9 @@ RUN apt-get update \
 	&& apt-get clean
 
 # Tooling unrelated to app.
-RUN go get golang.org/x/tools/cmd/goimports
+RUN go get \
+	golang.org/x/tools/cmd/goimports \
+	github.com/rakyll/gotest
 
 # Mount repo root to this folder on run.
 WORKDIR /go/src/app

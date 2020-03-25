@@ -15,7 +15,12 @@ function wait_for_change {
 		"./src/"
 }
 
-while wait_for_change; do
+function run_checks {
 	./bin/vet
 	./bin/test
+}
+
+run_checks
+while wait_for_change; do
+	run_checks
 done
