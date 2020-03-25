@@ -10,7 +10,7 @@ echo "--- Vetting code ..."
 
 cd ./src
 
-goimports -w ./
+goimports -l -w ./
 
 go mod tidy
 
