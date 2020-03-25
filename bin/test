@@ -10,6 +10,6 @@ echo "--- Running tests ..."
 
 cd ./src
 
-gotest -v
+richgo test -cover ./...
 
 echo "--- Running tests ... done!"
