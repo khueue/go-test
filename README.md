@@ -14,7 +14,7 @@ make run
 To minimize executable weight:
 
 ```
-go build -ldflags "-s -w"
+go build -trimpath -ldflags "-s -w"
 ```
 
 ```

@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+# set -o xtrace
+
+echo
+echo "--- Building app-wasm ..."
+
+export CGO_ENABLED=0
+export GOOS=js
+export GOARCH=wasm
+
+cd ./src
+
+rm -rf ../_dist/wasm/
+mkdir ../_dist/wasm/
+
+go build \
+	-o ../_dist/wasm/app.wasm \
+	./
+
+echo "--- Building app-wasm ... done!"

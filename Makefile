@@ -1,10 +1,25 @@
 default: cmd
 
+server:
+	docker run --interactive --tty --rm \
+		--mount type="bind",source="$(PWD)",target="/workdir",consistency="delegated" \
+		--mount type="bind",source="$(PWD)/_dist/wasm",target="/workdir/web/go",consistency="delegated" \
+		--workdir "/workdir" \
+		--publish 8000:8000 \
+		python:2 \
+		bash -c "cd ./web && python ./server.py"
+
 watch:
 	make cmd="./bin/watch"
 
+debug:
+	make cmd="./bin/build-linux && ./bin/debug"
+
 run:
 	make cmd="./bin/vet && ./bin/test && ./bin/build-linux && ./bin/run-linux"
+
+build-wasm:
+	make cmd="./bin/vet && ./bin/test && ./bin/build-wasm"
 
 build-darwin:
 	make cmd="./bin/vet && ./bin/test && ./bin/build-darwin"
