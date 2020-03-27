@@ -12,8 +12,11 @@ server:
 watch:
 	make cmd="./bin/watch"
 
-debug:
-	make cmd="./bin/build-linux && ./bin/debug"
+debug-run:
+	make cmd="./bin/vet && cd ./src && dlv debug ./"
+
+debug-test:
+	make cmd="./bin/vet && cd ./src && dlv test ./"
 
 run:
 	make cmd="./bin/vet && ./bin/test && ./bin/build-linux && ./bin/run-linux"

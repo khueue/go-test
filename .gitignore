@@ -1,2 +1,5 @@
 _dist/
 _temp/
+
+__debug_bin
+*.test
